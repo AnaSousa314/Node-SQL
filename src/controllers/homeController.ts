@@ -1,17 +1,16 @@
 import { Request, Response } from 'express';
 
 import { Product } from '../models/Product';
-
-import {sequelize} from '../instances/mysql'
+import { User } from "../models/Users"
 
 export const home = async (req: Request, res: Response)=>{
+
+    let users = await User.findAll();
+    // console.log("Usuários: ",JSON.stringify(users))
+
     
-    try {
-        await sequelize.authenticate();
-        console.log("Conexão estabelecida")
-    } catch (error) {
-        console.log("ERROR: " + error);
-    }
+
+
 
     let age: number = 90;
     let showOld: boolean = false;
@@ -29,6 +28,7 @@ export const home = async (req: Request, res: Response)=>{
         showOld,
         products: list,
         expensives: expensiveList,
-        frasesDoDia: []
+        frasesDoDia: [],
+        users
     });
 };
