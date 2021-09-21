@@ -52,19 +52,21 @@ export const home = async (req: Request, res: Response)=>{
     //     }
     // });
 
+    //aula 23 ordenando resultados
 
     let users = await User.findAll({
         where:{
             age: {[Op.gte]: 18}
         },
-        order: [
-            ['age','ASC'],
-            ['name','DESC'],
-        ]
+        // order: [
+        //     ['name','ASC'],
+        //     ['age','ASC'],
+        // ],
+        offset: 4,
+        limit: 2
     })
 
 
-    //aula 23 ordenando resultados
 
     let age: number = 90;
     let showOld: boolean = false;
