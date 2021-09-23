@@ -54,26 +54,54 @@ export const home = async (req: Request, res: Response)=>{
 
     //aula 23 ordenando resultados
 
-    let users = await User.findAll({
-        where:{
-            age: {[Op.gte]: 18}
-        },
-        // order: [
-        //     ['name','ASC'],
-        //     ['age','ASC'],
-        // ],
-        offset: 4,
-        limit: 2
-    })
+    // let users = await User.findAll({
+    //     where:{
+    //         age: {[Op.gte]: 18}
+    //     },
+    //     // order: [
+    //     //     ['name','ASC'],
+    //     //     ['age','ASC'],
+    //     // ],
+    //     offset: 4,
+    //     limit: 2
+    // })
+
+    //aula 25 
+
+    //build + save
+    //build cria a instancia do usuário direto no node
+    //ele serve para quando não temos certeza do valor de alguma variável.
+    // const user = User.build({
+    //     name: 'Carlos',
+        // age: 25
+    // });
+    // let age:number = 27;
+    // user.age = age,
+
+    // await user.save();
+
+    // console.log("Nome do usuário build ",user.name);
+    // console.log("Idade do usuário: ",user.age)
+
+    // await user.save();
 
 
+    //create 
+    const user = await User.create({
+        name: 'Mario',
+        age: 39
+    });
 
-    let age: number = 90;
-    let showOld: boolean = false;
+    console.log('Name: ',user.name);
+    console.log('Age: ',user.age);
 
-    if(age > 50) {
-        showOld = true;
-    }
+
+    // let age: number = 90;
+    // let showOld: boolean = false;
+
+    // if(age > 50) {
+    //     showOld = true;
+    // }
 
     let list = Product.getAll();
     let expensiveList = Product.getFromPriceAfter(12);
@@ -81,10 +109,10 @@ export const home = async (req: Request, res: Response)=>{
     res.render('pages/home', {
         name: 'Bonieky',
         lastName: 'Lacerda',
-        showOld,
+        // showOld,
         products: list,
         expensives: expensiveList,
         frasesDoDia: [],
-        users
+        // users
     });
 };

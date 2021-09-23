@@ -4,7 +4,7 @@ import { sequelize } from '../instances/mysql'
 export interface UserInstance extends Model{
   id:number,
   name: string,
-  idade: number
+  age: number
 }
 
 export const User = sequelize.define<UserInstance>("User",{
