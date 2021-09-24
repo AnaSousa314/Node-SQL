@@ -87,13 +87,13 @@ export const home = async (req: Request, res: Response)=>{
 
 
     //create 
-    const user = await User.create({
-        name: 'Mario',
-        age: 39
-    });
+    // const user = await User.create({
+    //     name: 'Mario',
+    //     age: 39
+    // });
 
-    console.log('Name: ',user.name);
-    console.log('Age: ',user.age);
+    // console.log('Name: ',user.name);
+    // console.log('Age: ',user.age);
 
 
     // let age: number = 90;
@@ -102,6 +102,8 @@ export const home = async (req: Request, res: Response)=>{
     // if(age > 50) {
     //     showOld = true;
     // }
+
+    let users = await User.findAll();
 
     let list = Product.getAll();
     let expensiveList = Product.getFromPriceAfter(12);
@@ -113,6 +115,6 @@ export const home = async (req: Request, res: Response)=>{
         products: list,
         expensives: expensiveList,
         frasesDoDia: [],
-        // users
+        users
     });
 };
