@@ -103,6 +103,31 @@ export const home = async (req: Request, res: Response)=>{
     //     showOld = true;
     // }
 
+
+    //aula 27
+
+
+    // 1. Dados a serem alterados
+    // 2. Condição para encontrar o(s) item(ns)
+
+    // primeiro parametro é novo valor que será colocada, o segundo é condição de onde esse valor será alterdo. No caso, todos os usuários menores de 18 anos receberam uma nova idade de 18 anos.
+    // await User.update({ age: 18}, {
+    //     where:{
+    //         age:{
+    //             [Op.lt]: 18
+    //         }
+    //     }
+    // });
+
+
+    // apenas um usuario
+    await User.update({name: 'Seu Chico', age: 56},{
+        where:{
+            id: 4
+        }
+    })
+
+
     let users = await User.findAll();
 
     let list = Product.getAll();
