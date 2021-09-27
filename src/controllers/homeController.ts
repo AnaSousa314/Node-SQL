@@ -121,12 +121,24 @@ export const home = async (req: Request, res: Response)=>{
 
 
     // apenas um usuario
-    await User.update({name: 'Seu Chico', age: 56},{
-        where:{
-            id: 4
-        }
-    })
+    // await User.update({name: 'Seu Chico', age: 56},{
+    //     where:{
+    //         id: 4
+    //     }
+    // })
 
+
+    let result = await User.findAll({
+        where:{id: 7}
+    });
+
+    if(result.length > 0){
+        let usuario = result[0];
+
+        usuario.age = 70;
+        await usuario.save();
+    }
+    console.log('Results ')
 
     let users = await User.findAll();
 
