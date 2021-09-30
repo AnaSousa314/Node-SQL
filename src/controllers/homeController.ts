@@ -182,3 +182,68 @@ export const home = async (req: Request, res: Response)=>{
         users
     });
 };
+
+
+export const idadeMais = async(req:Request,res:Response)=>{
+    let {id} = req.params
+    let results = await User.findAll({
+        where:{
+          id: id  
+        }
+    });
+
+    if(results.length > 0){
+        let user = results[0]
+        console.log(user.age)
+
+        user.age++
+
+        await user.save();  
+    }
+    
+    
+    res.redirect('/');
+
+}
+
+export const idadeMenos = async(req:Request,res:Response)=>{
+    let {id} = req.params
+    let results = await User.findAll({
+        where:{
+          id: id  
+        }
+    });
+
+    if(results.length > 0){
+        let user = results[0]
+        console.log(user.age)
+
+        user.age--
+
+        await user.save();  
+    }
+    
+    
+    res.redirect('/');
+
+}
+
+export const deleted = async(req:Request,res: Response)=>{
+    let {id} = req.params
+
+    await User.destroy({
+        where:{
+            id: id
+        }
+    });
+
+    //ou
+
+    // let user = await User.findByPk(id);
+
+    // await user?.destroy()
+
+    // console.log(results)
+    res.redirect('/');
+
+}

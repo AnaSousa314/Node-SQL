@@ -7,6 +7,10 @@ import * as UserController from '../controllers/userController';
 const router = Router();
 
 router.get('/', HomeController.home);
+router.get('/idademais/:id',HomeController.idadeMais);
+router.get('/idademenos/:id',HomeController.idadeMenos);
+router.get('/delete/:id',HomeController.deleted);
+
 
 router.get('/contato', InfoController.contato);
 router.get('/sobre', InfoController.sobre);
