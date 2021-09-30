@@ -128,17 +128,44 @@ export const home = async (req: Request, res: Response)=>{
     // })
 
 
-    let result = await User.findAll({
-        where:{id: 7}
+    // let result = await User.findAll({
+    //     where:{id: 7}
+    // });
+
+    // if(result.length > 0){
+    //     let usuario = result[0];
+
+    //     usuario.age = 70;
+    //     await usuario.save();
+    // }
+    // console.log('Results ')
+
+
+    //AULA 29
+
+    // primeira forma de deletar
+    // await User.destroy({
+    //     where:{
+    //         age:{
+    //             [Op.lte]: 18
+    //         }
+    //     }
+    // });
+
+    //segunda forma de deletar
+    let results = await User.findAll({
+        where:{
+           name:'João' 
+        }
     });
 
-    if(result.length > 0){
-        let usuario = result[0];
+    if(results.length > 0){
+        let usuario = results[0];
 
-        usuario.age = 70;
-        await usuario.save();
+        await usuario.destroy();
     }
-    console.log('Results ')
+
+    
 
     let users = await User.findAll();
 
