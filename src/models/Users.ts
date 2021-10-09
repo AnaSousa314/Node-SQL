@@ -38,6 +38,23 @@ export const User = sequelize.define<UserInstance>("User",{
   //   type: DataTypes.STRING
   // }
 
+  // campo virtual, ele não existe no banco de dados, existe apenas no model
+  firstLetterOfName:{
+     type: DataTypes.VIRTUAL,
+     get(){
+       let name: string = this.getDataValue('name');
+       return name.charAt(0);
+     }
+  },
+  //se tivessemos nome e sobrenome, para uni-los poderiamos criar um campo virtual para reunir esses dois dados somente no model.
+  fullName:{
+    type: DataTypes.VIRTUAL,
+    get(){
+      let name: string = this.getDataValue('name');
+      let lastName: string = 'Silva'
+      return `${name} ${lastName}`
+    }
+  }
 
 },{
   tableName: "users",
