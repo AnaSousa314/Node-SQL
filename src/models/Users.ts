@@ -10,7 +10,8 @@ export interface UserInstance extends Model{
 export const User = sequelize.define<UserInstance>("User",{
   id:{
     primaryKey: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    autoIncrement: true//assim quano usamos o findOrCreate, o sequelize entende o que está acontecendo e não dá erro
   },
   name:{
     type: DataTypes.STRING

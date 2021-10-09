@@ -153,17 +153,68 @@ export const home = async (req: Request, res: Response)=>{
     // });
 
     //segunda forma de deletar
-    let results = await User.findAll({
+    // let results = await User.findAll({
+    //     where:{
+    //        name:'João' 
+    //     }
+    // });
+
+    // if(results.length > 0){
+    //     let usuario = results[0];
+
+    //     await usuario.destroy();
+    // }
+
+    //AULA31 métodos finder
+
+    //o findOne pega o primeiro dado que atender as especificações, mesmo que haja outros ele só retornará o primeiro que encontrou
+    let usuario = await User.findOne({
         where:{
-           name:'João' 
+            // id:60
+
+            age:{
+                [Op.gt]: 18
+            }
+
+        }
+    });
+    
+    if(usuario){
+        console.log(`O usuário ${usuario.name}, idade ${usuario.age}`)
+    }else{
+        console.log('não encntradio')
+    }
+
+    let usuario2 = await User.findByPk(1);
+
+    // console.log(usuario2?.name)
+
+
+    // console.log(usuario)
+
+    // o findOrCreate se não encotrar o dado solicitado, ele cria esse dado com as especificações dadas
+
+    const [user,created] = await User.findOrCreate({
+        where:{
+            name: 'Catarina'
+        },
+        defaults:{
+            name: 'Catarina',//podemos colocar so o age pq no where já fala o name
+            age: 106
         }
     });
 
-    if(results.length > 0){
-        let usuario = results[0];
+    // console.log('Usuario',user);
+    // console.log('Created',created);//quando o usuario já existe, ele retorna false
 
-        await usuario.destroy();
+    if(created){
+        console.log('Usuário criado com sucesso!');
+    }else{
+        console.log('Achamos o usuário.')
     }
+
+    console.log('Usuario',user.name);
+
 
     
 
@@ -186,6 +237,12 @@ export const home = async (req: Request, res: Response)=>{
 
 export const idadeMais = async(req:Request,res:Response)=>{
     let {id} = req.params
+    // let results = await User.findAll({
+    //     where:{
+    //       id: id  
+    //     }
+    // });
+
     let results = await User.findAll({
         where:{
           id: id  
